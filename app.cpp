@@ -11,6 +11,8 @@
 #include "Speaker.h"
 #include "MotorControl.h"
 #include "Distance.h"
+#include "Scene.h"
+#include "Section1.h"
 
 // using ev3api::Clock;
 using ev3api::ColorSensor;
@@ -35,6 +37,7 @@ static LineTrace *gLineTrace;
 static Speaker *gSpeaker;
 static MotorControl *gMotorControl;
 static Distance *gDistance;
+static Section1 *gSection1;
 
 
 
@@ -57,8 +60,11 @@ static void user_system_create()
     gSpeaker = new Speaker();
     gMotorControl = new MotorControl();
     gDistance = new Distance(gSetMotor);
+    gSection1 = new Section1();
+
 
     RunAction::setObject(gB_ColorSensor,gSetMotor,gMotorControl,gLineTrace);
+    Scene::setObject(gLineTrace,gMotorControl,gB_ColorSensor,gDistance,gDisplay);
 }
 void main_task(intptr_t unused){
     user_system_create();
@@ -83,32 +89,24 @@ void main_task(intptr_t unused){
 
     // RunAction::setObject(&colorsensor,&setMotor);
     
-    
-    // int count = 0;
-    // char buf[32];
-    // while(!button.button_pressed_center()){
-
-    // }
-    // for(;;){
-    //     lineTrace.start();
-    //     sprintf(buf,"brightness: %d",colorsensor.get_rgb());
-    //     display.text_display(buf);
-    //     count++;
-    //     if(button.button_pressed_down()){
-    //         break;
-    //     }
-    // }
-    // setMotor.setSpeed(0,0);
-    
-    //setMotor.setSpeed(30,30);
-    
 }
 int run_state = 0;
 memfile_t memfile;
 
 void run_task(intptr_t unused){
     gDistance->getEncoder();
+    /*
+    gB_ColorSensor->get_rgb();
+    char buf[32];
+    sprintf(buf,"brightness: %d",gB_ColorSensor->get_rgb());
+    //sprintf(buf,"brightness: %d",run_state);
+    gDisplay->text_display(buf);
+    */
+
+
     switch(run_state){
+        
+        /*
         case 0:
         if(gBotton->button_pressed_left()){
             gSpeaker->set_volume(30);
@@ -119,41 +117,28 @@ void run_task(intptr_t unused){
         }
 
         break;
-
-        case 5:
-        gLineTrace->start();
-        ev3_memfile_load("ev3rt/res/zinguru.wav", &memfile); //SDカード内の"test.wav"をメモリファイルとしてロード
-        gSpeaker->play_file(&memfile,SOUND_MANUAL_STOP);
-        char buf[32];
-        sprintf(buf,"brightness: %d",gB_ColorSensor->get_rgb());
-        //sprintf(buf,"brightness: %d",run_state);
-        gDisplay->text_display(buf);
-        /*
-        if(gBotton->button_pressed_down()){
-            run_state = 10;
-        }
         */
-        if(gDistance->getDistance() > 30){
+
+        case 0:
+        printf("left button pressed\n");
+         
+        if(gBotton->button_pressed_left()){
+            printf("left button pressed\n");
+            // char buf[32];
+            // sprintf(buf,"brightness: %d",gB_ColorSensor->get_rgb());
+            // gDisplay->text_display(buf);
+            //sprintf(buf,"brightness: %d",run_state);
+            //gLineTrace->setParameter(20,0.2,0,1);
+            
             run_state = 10;
-            gLineTrace->setParameter(20,0.2,0,1);
-            gDistance->stop();
         }
         break;
 
         case 10:
-        gLineTrace->start();
-        if(gDistance->getDistance() >100){
-            gMotorControl->setParameter(0,70);
+        gSection1->exectue();
+        if(gSection1->isFinished()){
             run_state = 15;
         }
-        break;
-
-        case 15:
-        gMotorControl->start();
-        break;
-
-        case 20:
-        gSetMotor->setSpeed(0,0);
         break;
     }
     /*

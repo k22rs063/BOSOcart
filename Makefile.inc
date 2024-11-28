@@ -8,7 +8,9 @@ APPL_CXXOBJS +=	SetMotor.o\
                 LineTrace.o\
                 Speaker.o\
                 MotorControl.o\
-                Distance.o
+                Distance.o\
+                Scene.o\
+                Section1.o
 
 SRCLANG := c++
 COPTS += -std=c++11

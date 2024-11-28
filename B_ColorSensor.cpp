@@ -43,7 +43,9 @@ int B_ColorSensor::get_rgb()
 		Saturation /= max;
 		H = Hue * 100;
 	S = Saturation * 100;
+	
   log3 = Brightness * 100;
-
+  syslog(LOG_NOTICE, "%d,%d,%d", (int16_t)H,  (int16_t)S,  (int16_t)rgb_brightness);
+  //return H;
   return rgb_brightness;
 }

@@ -8,7 +8,7 @@
 class RunAction{
     public:
     virtual ~RunAction();
-
+    
     virtual void start() = 0;
     virtual void stop() = 0;
 

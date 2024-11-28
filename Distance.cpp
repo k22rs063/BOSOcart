@@ -39,7 +39,7 @@ int Distance::getEncoder()
 	//走行体の距離変化量を計算
 	delta_distance = (delta_right_wheel_distance + delta_left_wheel_distance) / 2.0;
 	//走行体の走行距離を計算
-	distance += delta_distance;
+	return distance += delta_distance;
 }
 
 int Distance::getDistance()

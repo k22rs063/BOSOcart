@@ -10,7 +10,7 @@ LineTrace::~LineTrace()
 
 void LineTrace::start()
 {
-    brightness = mB_ColorSensor->get_rgb();
+    brightness = ((mB_ColorSensor->get_rgb()) * 75 / 76);
     changeSpeed = speed;
     changeKp = kp;
     changeKi = ki;
@@ -29,7 +29,7 @@ void LineTrace::start()
 
 void LineTrace::stop()
 {
-
+    mSetMotor->setSpeed(0,0);
 }
 
 
