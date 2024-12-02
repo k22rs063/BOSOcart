@@ -4,6 +4,7 @@ Distance::Distance(SetMotor *setMotor)
     : mSetMotor(setMotor)
 {
 }
+
 Distance::~Distance()
 {
 }
@@ -18,7 +19,7 @@ void Distance::stop()
     distance = 0;
 }
 
-int Distance::getEncoder()
+void Distance::getEncoder()
 {
     right_wheel_angle[1] = mSetMotor->getRinghtEncoder();
 	left_wheel_angle[1] = mSetMotor->getLeftEncoder();
@@ -39,7 +40,7 @@ int Distance::getEncoder()
 	//走行体の距離変化量を計算
 	delta_distance = (delta_right_wheel_distance + delta_left_wheel_distance) / 2.0;
 	//走行体の走行距離を計算
-	return distance += delta_distance;
+	distance += delta_distance;
 }
 
 int Distance::getDistance()

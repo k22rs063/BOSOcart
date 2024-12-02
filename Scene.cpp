@@ -5,6 +5,7 @@ MotorControl *Scene::mMotorControl;
 B_ColorSensor *Scene::mB_ColorSensor;
 Distance *Scene::mDistance;
 Display *Scene::mDisplay;
+BGMControl *Scene::mBGMControl;
 
 // デストラクタ
 Scene::~Scene() {
@@ -16,12 +17,14 @@ void Scene::setObject(
     MotorControl *motorControl,
     B_ColorSensor *b_ColorSensor,
     Distance *distance,
-    Display *display) 
+    Display *display,
+    BGMControl *bgmControl) 
 {
     mLineTrace = lineTrace;
     mMotorControl = motorControl;
     mB_ColorSensor = b_ColorSensor;
     mDistance = distance;
     mDisplay = display;
+    mBGMControl = bgmControl;
 }
 

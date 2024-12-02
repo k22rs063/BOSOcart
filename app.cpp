@@ -13,6 +13,9 @@
 #include "Distance.h"
 #include "Scene.h"
 #include "Section1.h"
+#include "SecondSection.h"
+#include "ThirdSection.h"
+#include "BGMControl.h"
 
 // using ev3api::Clock;
 using ev3api::ColorSensor;
@@ -38,6 +41,9 @@ static Speaker *gSpeaker;
 static MotorControl *gMotorControl;
 static Distance *gDistance;
 static Section1 *gSection1;
+static SecondSection *gSecondSection;
+static ThirdSection *gThirdSection;
+static BGMControl *gBGMControl;
 
 
 
@@ -61,15 +67,39 @@ static void user_system_create()
     gMotorControl = new MotorControl();
     gDistance = new Distance(gSetMotor);
     gSection1 = new Section1();
+    gSecondSection = new SecondSection();
+    gThirdSection = new ThirdSection();
+    gBGMControl = new BGMControl(gSpeaker);
 
 
     RunAction::setObject(gB_ColorSensor,gSetMotor,gMotorControl,gLineTrace);
-    Scene::setObject(gLineTrace,gMotorControl,gB_ColorSensor,gDistance,gDisplay);
+    Scene::setObject(gLineTrace,gMotorControl,gB_ColorSensor,gDistance,gDisplay,gBGMControl);
 }
+bool flag = false;
 void main_task(intptr_t unused){
     user_system_create();
 
+    // memfile_t memfile; // メモリファイルの構造体を作成
+    // ev3_memfile_load("ev3rt/res/Zing.wav", &memfile); //SDカード内の"test.wav"をメモリファイルとしてロード
 
+    // ev3_speaker_set_volume(10); //音量の設定
+    // ev3_speaker_play_file(&memfile, SOUND_MANUAL_STOP); // 音声ファイルを再生
+
+    //gBGMControl->setBGM();
+    //gBGMControl->startBGM();
+    /*
+    while (!flag) {
+		tslp_tsk(100*10000U);
+	}
+
+    */
+    //gDisplay->text_ao();
+    
+    /*
+    gDisplay->image_load("ev3rt/res/momo3.bmp");
+    gDisplay->draw_image();
+    */
+    
     sta_cyc(EV3_CYC_RUN);
     slp_tsk();
     stp_cyc(EV3_CYC_RUN);
@@ -95,6 +125,7 @@ memfile_t memfile;
 
 void run_task(intptr_t unused){
     gDistance->getEncoder();
+    gB_ColorSensor->get_rgb();
     /*
     gB_ColorSensor->get_rgb();
     char buf[32];
@@ -102,43 +133,48 @@ void run_task(intptr_t unused){
     //sprintf(buf,"brightness: %d",run_state);
     gDisplay->text_display(buf);
     */
+    if(gBotton->button_pressed_down()){
+            run_state=50;
+        }
+
 
 
     switch(run_state){
         
-        /*
-        case 0:
-        if(gBotton->button_pressed_left()){
-            gSpeaker->set_volume(30);
-            //gSpeaker->set_play_tone(NOTE_G6,30);
-            run_state = 5;
-            gDistance->start();
-            gLineTrace->setParameter(10,0.2,0,1);
-        }
-
-        break;
-        */
-
         case 0:
         printf("left button pressed\n");
-         
+        
         if(gBotton->button_pressed_left()){
             printf("left button pressed\n");
-            // char buf[32];
-            // sprintf(buf,"brightness: %d",gB_ColorSensor->get_rgb());
-            // gDisplay->text_display(buf);
-            //sprintf(buf,"brightness: %d",run_state);
-            //gLineTrace->setParameter(20,0.2,0,1);
-            
-            run_state = 10;
+            gBGMControl->setBGM();
+            gBGMControl->startBGM();
+            run_state = 20;
         }
         break;
 
         case 10:
-        gSection1->exectue();
+        gSection1->execute();
         if(gSection1->isFinished()){
             run_state = 15;
         }
+        break;
+
+        case 15:
+        gSecondSection->execute();
+        if(gSecondSection->isFinished()){
+            run_state = 20;
+        }
+        break;
+
+        case 20:
+        gThirdSection->execute();
+        if(gThirdSection->isFinished()){
+            run_state = 25;
+        }
+        break;
+
+        case 50:
+        gSetMotor->setSpeed(0,0);
         break;
     }
     /*

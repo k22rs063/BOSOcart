@@ -41,11 +41,65 @@ int B_ColorSensor::get_rgb()
 	Saturation = (max - min);
 	if (max != 0.0f)
 		Saturation /= max;
-		H = Hue * 100;
+		H = Hue * 100 ;
 	S = Saturation * 100;
 	
   log3 = Brightness * 100;
   syslog(LOG_NOTICE, "%d,%d,%d", (int16_t)H,  (int16_t)S,  (int16_t)rgb_brightness);
   //return H;
   return rgb_brightness;
+}
+
+float B_ColorSensor::get_H()
+{
+	return H;
+}
+
+float B_ColorSensor::get_S()
+{
+	return S;
+}
+
+bool B_ColorSensor::Color_blue()
+{
+	return (H > 50) ? true : false;
+}
+
+bool B_ColorSensor::Color_green()
+{
+	return ((S > 57) && rgb_brightness > 20) ? true : false;
+}
+
+bool B_ColorSensor::Color_yellow()
+{
+	return ((S > 70) && rgb_brightness > 55) ? true : false;
+}
+
+bool B_ColorSensor::Color_red()
+{
+	return ((H < 18) && (S > 65)) ? true : false;
+}
+
+bool B_ColorSensor::Color_black()
+{
+	return (rgb_brightness < 15) ? true : false;
+}
+
+bool B_ColorSensor::Color_white()
+{
+	return (rgb_brightness > 30) ? true : false;
+}
+bool B_ColorSensor::Color_blueWhite()
+{
+	if((S >= 30) && (rgb_brightness > 45)){
+		count++;
+	}else{
+		count = 0;
+	}
+	if(count >=6){
+		return true;
+		count = 0;
+	}else{
+		return false;
+	}
 }

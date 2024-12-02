@@ -10,12 +10,12 @@ LineTrace::~LineTrace()
 
 void LineTrace::start()
 {
-    brightness = ((mB_ColorSensor->get_rgb()) * 75 / 76);
+    brightness = ((mB_ColorSensor->get_rgb()) * 75 / 87);
     changeSpeed = speed;
     changeKp = kp;
     changeKi = ki;
     changeKd = kd;
-    target = 30;
+    target = 40;
 
     deviation = target - brightness;
 	integral = deviation + integral * 0.5;

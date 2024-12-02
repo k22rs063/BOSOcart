@@ -10,35 +10,48 @@ Section1::~Section1()
 }
 
 
-void Section1::exectue()
+void Section1::execute()
 {
-    //mDistance->getEncoder();
-    mB_ColorSensor->get_rgb();
+    /*
     char buf[32];
-    //sprintf(buf,"brightness: %d",mB_ColorSensor->get_rgb());
-    sprintf(buf,"Section1->state: %d",state);
+    sprintf(buf, "Section1->state: %d", state);
     mDisplay->text_display(buf);
-
-    switch(state){
+    */
+    mB_ColorSensor->get_rgb();
+    char buf[64];
+    sprintf(buf, "H: %.2f", mB_ColorSensor->get_H());
+    ev3_lcd_draw_string(buf,10,10);
+    char buf2[64];
+    sprintf(buf2, "S: %.2f", mB_ColorSensor->get_S());
+    ev3_lcd_draw_string(buf2,10,20);
+    char buf3[16];
+    sprintf(buf3, "B: %d", mB_ColorSensor->get_rgb());
+    ev3_lcd_draw_string(buf3,10,30);
+    
+    
+    switch(state) {
         case 0:
-        mLineTrace->setParameter(30,0.2,0,1);
-        state = 10;
-        break;
+            mLineTrace->setParameter(10, 0.3, 0, 0.7);
+            mDistance->start();
+            state = 10;
+            break;
+
 
         case 10:
-        mLineTrace->start();
-        if(mDistance->getDistance() > 100){
-            state = 15;
-        }
-        break;
+            mLineTrace->start();
+            
+           
+            
+            break;
 
         case 15:
-        mLineTrace->stop();
-        break;
+            mLineTrace->stop();
+            //flag = true;
+            break;
     }
+    
 }
-
 bool Section1::isFinished()
 {
-
+    return flag;
 }

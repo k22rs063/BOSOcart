@@ -11,7 +11,7 @@ class Distance{
 
     void start();
     void stop();
-    int getEncoder();
+    void getEncoder();
     int getDistance();
 
     private:

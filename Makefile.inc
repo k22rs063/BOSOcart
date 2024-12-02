@@ -10,7 +10,10 @@ APPL_CXXOBJS +=	SetMotor.o\
                 MotorControl.o\
                 Distance.o\
                 Scene.o\
-                Section1.o
+                Section1.o\
+                SecondSection.o\
+                ThirdSection.o\
+                BGMControl.o
 
 SRCLANG := c++
 COPTS += -std=c++11
