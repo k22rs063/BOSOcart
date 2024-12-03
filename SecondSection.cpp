@@ -18,21 +18,17 @@ void SecondSection::execute()
     
     switch(state) {
         case 0:
-            mLineTrace->setParameter(10, 0.2, 0, 1);
+            mLineTrace->setParameter(20, 0.2, 0, 3);
             mDistance->start();
             state = 10;
             break;
 
         case 10:
             mLineTrace->start();
-            if (mDistance->getDistance() > 50) {
-                state = 15;
+            if (mB_ColorSensor->Color_red()) {
+                mLineTrace->stop();
+                flag = true;
             }
-            break;
-
-        case 15:
-            mLineTrace->stop();
-            flag = true;
             break;
     }
     

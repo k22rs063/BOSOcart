@@ -94,6 +94,12 @@ void main_task(intptr_t unused){
 
     */
     //gDisplay->text_ao();
+    // gBGMControl->setBGM("ev3rt/res/blue.wav");
+    // gBGMControl->startBGM();
+    gBGMControl->set_blueBGM();
+    gBGMControl->set_greenBGM();
+    gBGMControl->set_yellowBGM();
+    gBGMControl->set_redBGM();
 
     
     
@@ -117,7 +123,7 @@ void main_task(intptr_t unused){
     // RunAction::setObject(&colorsensor,&setMotor);
     
 }
-int run_state;
+int run_state = 200;
 memfile_t memfile;
 int timer = 0;
 
@@ -137,6 +143,7 @@ void run_task(intptr_t unused){
 
         //gDisplay->text("runMode");
 
+        /*
         if(gBotton->button_pressed_right()){
             gDisplay->text_reset();
             gDisplay->text("ColorMode");
@@ -146,19 +153,39 @@ void run_task(intptr_t unused){
             gDisplay->text("runMode");
             run_state = 0;
         }
+        */
 
 
 
     switch(run_state){
+
+        case 200:
+        gDisplay->text("runMode");
+        if(gBotton->button_pressed_right()){
+            gDisplay->text_reset();
+            run_state = 205;
+        }else if(gBotton->button_pressed_center()){
+            run_state = 0;
+        }
+        break;
+
+        case 205:
+        gDisplay->text("ColorMode");
+        if(gBotton->button_pressed_left()){
+            gDisplay->text_reset();
+            run_state = 200;
+        }else if(gBotton->button_pressed_center()){
+            run_state = 100;
+        }
+        break;
         
         case 0:
-        printf("left button pressed\n");
         
         if(gBotton->button_pressed_center()){
             printf("left button pressed\n");
             // gBGMControl->setBGM();
             // gBGMControl->startBGM();
-            run_state = 20;
+            run_state = 10;
         }
         break;
 

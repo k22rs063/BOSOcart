@@ -17,6 +17,7 @@ class ThirdSection : public Scene{
     void straight();
     void setFlag(bool set_flag);
     bool getFlag();
+    void lineStop(int color);
 
     const int blue = 0;
     const int green = 1;
@@ -25,8 +26,8 @@ class ThirdSection : public Scene{
 
 
     int state;
-    double circlerush = 2;
-    double circle_l = 3;
+    double circlerush = 2;//2
+    double circle_l = 2.5;//3
     int circlestraight = 12;
     int rotate_distance = 5;
 
@@ -34,6 +35,8 @@ class ThirdSection : public Scene{
     int turn_right_state = 0;
     int turn_left_state = 0;
     int straight_state = 0;
+
+    int lineStop_state = 0;
 
     bool function_flag = false;
     bool flag=false;
@@ -43,6 +46,7 @@ class ThirdSection : public Scene{
     double sti = 0;
     double std = 0.8;//5
     int stdistance = 15;
+    int counter = 0;
 
 
     int waspeed = 10;//弱めのライントレース

@@ -31,23 +31,45 @@ void Section1::execute()
     
     switch(state) {
         case 0:
-            mLineTrace->setParameter(10, 0.3, 0, 0.7);
+            mLineTrace->setParameter(45, 0.07, 0, 1.3);
             mDistance->start();
             state = 10;
             break;
 
-
         case 10:
             mLineTrace->start();
-            
-           
-            
+            if(mDistance->getDistance() > 260){
+                mLineTrace->setParameter(30, 0.4, 0, 6);
+                mDistance->start();
+                state = 15;
+            }
             break;
 
         case 15:
-            mLineTrace->stop();
+            mLineTrace->start();
+            if(mDistance->getDistance() > 70){
+                mLineTrace->setParameter(45,0.07,0,1.3);
+                mDistance->start();
+                state = 20;
+            }
             //flag = true;
             break;
+
+        case 20:
+        mLineTrace->start();
+        if(mDistance->getDistance() > 150){
+            mLineTrace->setParameter(30,0.4,0,5);
+            state = 25;
+        }
+        break;
+
+        case 25:
+        mLineTrace->start();
+        if(mDistance->getDistance() > 70){
+            flag = true;
+            mLineTrace->stop();
+        }
+        break;
     }
     
 }

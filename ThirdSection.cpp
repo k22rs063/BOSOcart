@@ -2,7 +2,7 @@
 
 ThirdSection::ThirdSection()
 {
-    state = 0;
+    state = 5;
 }
 
 ThirdSection::~ThirdSection()
@@ -56,10 +56,21 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/blue2-2.bmp");
             mDisplay->draw_image();
-            state = 15;
+            //mBGMControl->startBGM_blue();
+            state = 10;
+            
         }
 
         break;
+
+        case 10:
+        lineStop(blue);
+        if(function_flag){
+            function_flag = false;
+            state = 15;
+        }
+        break;
+
 
 
         case 15:
@@ -77,8 +88,18 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/blue2-2.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_blue();
+            state = 21;
+        }
+        break;
+
+        case 21:
+        lineStop(blue);
+        if(function_flag){
+            function_flag = false;
             state = 25;
         }
+    
         break;
 
         case 25:
@@ -93,12 +114,22 @@ void ThirdSection::execute()
         LineTrace(green);
         if(function_flag){
             function_flag = false;
-            state = 35;
+            state = 31;
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/green.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_green();
         }
         break;
+
+        case 31:
+        lineStop(green);
+        if(function_flag){
+            function_flag = false;
+            state = 35;
+        }
+        break;
+
 
         case 35:
         straight();
@@ -115,6 +146,15 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/green.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_green();
+            state = 41;
+        }
+        break;
+
+        case 41:
+        lineStop(green);
+        if(function_flag){
+            function_flag = false;
             state = 45;
         }
         break;
@@ -134,6 +174,15 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/green.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_green();
+            state = 51;
+        }
+        break;
+
+        case 51:
+        lineStop(green);
+        if(function_flag){
+            function_flag = false;
             state = 55;
         }
         break;
@@ -153,6 +202,15 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/green.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_green();
+            state = 61;
+        }
+        break;
+
+        case 61:
+        lineStop(green);
+        if(function_flag){
+            function_flag = false;
             state = 65;
         }
         break;
@@ -172,6 +230,15 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/blue2-2.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_blue();
+            state = 71;
+        }
+        break;
+
+        case 71:
+        lineStop(blue);
+        if(function_flag){
+            function_flag = false;
             state = 75;
         }
         break;
@@ -191,6 +258,15 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/blue2-2.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_blue();
+            state = 81;
+        }
+        break;
+
+        case 81:
+        lineStop(blue);
+        if(function_flag){
+            function_flag = false;
             state = 85;
         }
         break;
@@ -210,8 +286,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/red.bmp");
             mDisplay->draw_image();
-            state = 95;
+            //mBGMControl->startBGM_red();
+            state = 91;
             }
+        break;
+
+        case 91:
+        lineStop(red);
+        if(function_flag){
+            function_flag = false;
+            state = 95;
+        }
         break;
 
         case 95:
@@ -229,8 +314,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/red.bmp");
             mDisplay->draw_image();
-            state = 105;
+            //mBGMControl->startBGM_red();
+            state = 101;
             }
+        break;
+
+        case 101:
+        lineStop(red);
+        if(function_flag){
+            function_flag = false;
+            state = 105;
+        }
         break;
 
         case 105:
@@ -248,8 +342,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/yellow.bmp");
             mDisplay->draw_image();
-            state = 115;
+            //mBGMControl->startBGM_yellow();
+            state = 111;
             }
+        break;
+
+        case 111:
+        lineStop(yellow);
+        if(function_flag){
+            function_flag = false;
+            state = 115;
+        }
         break;
 
         case 115:
@@ -267,8 +370,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/yellow.bmp");
             mDisplay->draw_image();
-            state = 125;
+            //mBGMControl->startBGM_yellow();
+            state = 121;
             }
+        break;
+
+        case 121:
+        lineStop(yellow);
+        if(function_flag){
+            function_flag = false;
+            state = 125;
+        }
         break;
 
         case 125:
@@ -286,8 +398,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/yellow.bmp");
             mDisplay->draw_image();
-            state = 135;
+            //mBGMControl->startBGM_yellow();
+            state = 131;
             }
+        break;
+
+        case 131:
+        lineStop(yellow);
+        if(function_flag){
+            function_flag = false;
+            state = 135;
+        }
         break;
 
         case 135:
@@ -305,8 +426,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/yellow.bmp");
             mDisplay->draw_image();
-            state = 145;
+            //mBGMControl->startBGM_yellow();
+            state = 141;
             }
+        break;
+
+        case 141:
+        lineStop(yellow);
+        if(function_flag){
+            function_flag = false;
+            state = 145;
+        }
         break;
 
         case 145:
@@ -324,8 +454,17 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/red.bmp");
             mDisplay->draw_image();
-            state = 155;
+            //mBGMControl->startBGM_red();
+            state = 151;
             }
+        break;
+
+        case 151:
+        lineStop(red);
+        if(function_flag){
+            function_flag = false;
+            state = 155;
+        }
         break;
 
         case 155:
@@ -343,6 +482,7 @@ void ThirdSection::execute()
             mDisplay->text_reset();
             mDisplay->image_load("ev3rt/res/red.bmp");
             mDisplay->draw_image();
+            //mBGMControl->startBGM_red();
             state = 9999;
             }
         break;
@@ -484,6 +624,38 @@ void ThirdSection::straight()
             straight_state = 0;
             function_flag = true;
         }
+        break;
+    }
+}
+
+void ThirdSection::lineStop(int color)
+{
+    switch(lineStop_state){
+
+        case 0:
+        mLineTrace->stop();
+        if(color == 0){
+            mBGMControl->startBGM_blue();
+            lineStop_state = 5;
+        }else if(color == 1){
+            mBGMControl->startBGM_green();
+            lineStop_state = 5;
+        }else if(color == 2){
+            mBGMControl->startBGM_red();
+            lineStop_state = 5;
+        }else{
+            mBGMControl->startBGM_yellow();
+            lineStop_state = 5;
+        }
+        break;
+        case 5:
+        mLineTrace->stop();
+        counter++;
+            if(counter >= 200){
+                function_flag =true;
+                counter = 0;
+                lineStop_state = 0;
+            }
         break;
     }
 }
