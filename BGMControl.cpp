@@ -12,7 +12,7 @@ BGMControl::~BGMControl()
 void BGMControl::setBGM()
 {
      //ev3_memfile_free(memfile_t *p_memfile);
-     ev3_memfile_load("ev3rt/res/zinguru.wav", &memfile); //SDカード内の"test.wav"をメモリファイルとしてロード
+     ev3_memfile_load("ev3rt/res/rairac.wav", &memfile); //SDカード内の"test.wav"をメモリファイルとしてロード
      //ev3_speaker_play_file(p_memfile,duration);
 }
 

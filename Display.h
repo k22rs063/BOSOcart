@@ -10,8 +10,11 @@ class Display
     virtual ~Display();
     void text_display(const char *text);
     void image_load(const char *pass);
-    void draw_image();
+    void text(const char *text2);
+    void text_reset();
+    bool draw_image();
     void text_ao();
+
 
 
     private:

@@ -19,8 +19,15 @@ class B_ColorSensor
     bool Color_white();
 
     bool Color_blueWhite();
+    int get_Color();
 
     private:
+    const int blue = 0;
+    const int red = 1;
+    const int green = 2;
+    const int yellow = 3;
+    const int purple = 4;
+    const int error = 5;
     rgb_raw_t rgb;
     float Hue;
 	float Saturation;

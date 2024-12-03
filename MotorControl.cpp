@@ -20,12 +20,13 @@ void MotorControl::straight()
 
 void MotorControl::turnright()
 {
-    mSetMotor->setSpeed(12,0);
+    //mSetMotor->setSpeed(12,0);
+    mSetMotor->setSpeed(20,-5);
 }
 
 void MotorControl::trunleft()
 {
-    mSetMotor->setSpeed(0,20);
+    mSetMotor->setSpeed(-5,20);
 }
 
 void MotorControl::Returnleft()
