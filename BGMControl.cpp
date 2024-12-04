@@ -62,3 +62,7 @@ void BGMControl::startBGM_red(){
 void BGMControl::startBGM_yellow(){
     ev3_speaker_play_file(&memfile_yellow, SOUND_MANUAL_STOP);
 }
+
+void BGMControl::stopBGM(){
+    mSpeaker->stop();
+}

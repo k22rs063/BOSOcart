@@ -18,6 +18,7 @@ class BGMControl
     void startBGM_green();
     void startBGM_red();
     void startBGM_yellow();
+    void stopBGM();
 
     private:
     Speaker *mSpeaker;

@@ -17,6 +17,7 @@ class B_ColorSensor
     bool Color_red();
     bool Color_black();
     bool Color_white();
+    bool Color_purple();
 
     bool Color_blueWhite();
     int get_Color();

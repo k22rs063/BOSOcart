@@ -126,7 +126,7 @@ void main_task(intptr_t unused){
 int run_state = 200;
 memfile_t memfile;
 int timer = 0;
-
+int before_color = 5;
 void run_task(intptr_t unused){
     gDistance->getEncoder();
     gB_ColorSensor->get_rgb();
@@ -225,26 +225,43 @@ void run_task(intptr_t unused){
         if(gB_ColorSensor->get_Color() == 0){
              gDisplay->text_reset();
              //gDisplay->text("BLUE");
+             if(gB_ColorSensor->get_Color() != before_color){
+                gBGMControl->startBGM_blue();
+             }
             gDisplay->image_load("ev3rt/res/blue2-2.bmp");
+            before_color = 0;
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 2){
              gDisplay->text_reset();
              //gDisplay->text("GREEN");
             gDisplay->image_load("ev3rt/res/green.bmp");
+            if(gB_ColorSensor->get_Color() != before_color){
+                gBGMControl->startBGM_green();
+             }
+            before_color = 2;
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 1){
              gDisplay->text_reset();
              //gDisplay->text("RED");
             gDisplay->image_load("ev3rt/res/red.bmp");
+            if(gB_ColorSensor->get_Color() != before_color){
+                gBGMControl->startBGM_red();
+             }
+            before_color = 1;
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 3){
              gDisplay->text_reset();
              //gDisplay->text("YELLOW");
             gDisplay->image_load("ev3rt/res/yellow.bmp");
+            if(gB_ColorSensor->get_Color() != before_color){
+                gBGMControl->startBGM_yellow();
+             }
+            before_color = 3;
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 4){
              gDisplay->text_reset();
              gDisplay->image_load("ev3rt/res/purple.bmp");
+             before_color = 4;
              //gDisplay->text("PURPLE");
             //run_state = 130;
             run_state = 110;
@@ -265,7 +282,7 @@ void run_task(intptr_t unused){
 
         case 115:
         timer++;
-        if(timer >= 100){
+        if(timer >= 200){
             run_state = 105;
             timer = 0;
         }

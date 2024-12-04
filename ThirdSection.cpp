@@ -195,12 +195,12 @@ void ThirdSection::execute()
         }
         break;
 
-        case 60://４つ目の緑
-        LineTrace(green);
+        case 60://１つ目の紫
+        LineTrace(purple);
         if(function_flag){
             function_flag = false;
             mDisplay->text_reset();
-            mDisplay->image_load("ev3rt/res/green.bmp");
+            mDisplay->image_load("ev3rt/res/purple.bmp");
             mDisplay->draw_image();
             //mBGMControl->startBGM_green();
             state = 61;
@@ -223,12 +223,12 @@ void ThirdSection::execute()
         }
         break;
 
-        case 70://３つ目の青
-        LineTrace(blue);
+        case 70://2つ目の紫
+        LineTrace(purple);
         if(function_flag){
             function_flag = false;
             mDisplay->text_reset();
-            mDisplay->image_load("ev3rt/res/blue2-2.bmp");
+            mDisplay->image_load("ev3rt/res/purple.bmp");
             mDisplay->draw_image();
             //mBGMControl->startBGM_blue();
             state = 71;
@@ -307,12 +307,12 @@ void ThirdSection::execute()
             }
         break;
 
-        case 100:
-            LineTrace(red);//２つ目赤
+        case 100://３つ目紫
+            LineTrace(purple);//２つ目赤
             if(function_flag){
             function_flag = false;
             mDisplay->text_reset();
-            mDisplay->image_load("ev3rt/res/red.bmp");
+            mDisplay->image_load("ev3rt/res/purple.bmp");
             mDisplay->draw_image();
             //mBGMControl->startBGM_red();
             state = 101;
@@ -335,12 +335,12 @@ void ThirdSection::execute()
             }
         break;
 
-        case 110://一つ目黄色
-            LineTrace(yellow);
+        case 110://４つ目紫
+            LineTrace(purple);
             if(function_flag){
             function_flag = false;
             mDisplay->text_reset();
-            mDisplay->image_load("ev3rt/res/yellow.bmp");
+            mDisplay->image_load("ev3rt/res/purple.bmp");
             mDisplay->draw_image();
             //mBGMControl->startBGM_yellow();
             state = 111;
@@ -483,9 +483,104 @@ void ThirdSection::execute()
             mDisplay->image_load("ev3rt/res/red.bmp");
             mDisplay->draw_image();
             //mBGMControl->startBGM_red();
-            state = 9999;
+            state = 165;
             }
         break;
+
+        case 165:
+        lineStop(red);
+        if(function_flag){
+            function_flag = false;
+            mDisplay->text_reset();
+            mDisplay->image_load("ev3rt/res/red.bmp");
+            mDisplay->draw_image();
+            mMotorControl->setParameter(20,20);
+            state = 170;
+        }
+        break;
+
+        case 170:
+        mMotorControl->RotateAction(true);
+        if(mB_ColorSensor->Color_black()){
+            mMotorControl->stop();
+            state = 175;
+        }
+        break;
+
+        case 175://旋回後1つ目の赤
+        LineTrace(red);
+        if(function_flag){
+            function_flag = false;
+            mDisplay->text_reset();
+            mDisplay->image_load("ev3rt/res/red.bmp");
+            mDisplay->draw_image();
+            //mMotorControl->setParameter(20,20);
+            state = 176;
+        }
+        break;
+
+        case 176:
+        lineStop(red);
+        if(function_flag){
+            function_flag = false;
+            state = 180;
+        }
+        break;
+
+        case 180:
+        straight();
+        if(function_flag){
+            function_flag = false;
+            state = 185;
+        }
+        break;
+
+        case 185://旋回必要な1つ目の黄色
+        LineTrace(yellow);
+        if(function_flag){
+            function_flag = false;
+            mDisplay->text_reset();
+            mDisplay->image_load("ev3rt/res/yellow.bmp");
+            mDisplay->draw_image();
+            state = 190;
+        }
+        break;
+
+        case 190:
+        lineStop(yellow);
+        if(function_flag){
+            function_flag = false;
+            state = 195;
+        }
+        break;
+
+        case 195:
+        straight();
+        if(function_flag){
+            function_flag = false;
+            state = 200;
+        }
+        break;
+
+        case 200:
+        LineTrace(yellow);
+        if(function_flag){
+            function_flag = false;
+            mDisplay->text_reset();
+            mDisplay->image_load("ev3rt/res/yellow.bmp");
+            mDisplay->draw_image();
+            state = 205;
+        }
+        break;
+
+        case 205:
+        lineStop(yellow);
+        if(function_flag){
+            state = 9999;
+        }
+        break;
+
+        
 
 
         case 9999:
@@ -506,7 +601,7 @@ void ThirdSection::LineTrace(int color)
 {
     switch(LineTrace_state){
         case 0:
-        mLineTrace->setParameter(stspeed,0.23,0,4);
+        mLineTrace->setParameter(stspeed,0.23,0,4);//0.23,0,4
         mDistance->start();
         LineTrace_state++;
 
@@ -519,7 +614,7 @@ void ThirdSection::LineTrace(int color)
         break;
 
         case 2:
-        mLineTrace->setParameter(stspeed,0.1,0,0.1);
+        mLineTrace->setParameter(stspeed,0,0,0);//0.05,0,0.1
         mDistance->start();
         LineTrace_state++;
 
@@ -536,6 +631,9 @@ void ThirdSection::LineTrace(int color)
             function_flag = true;
             LineTrace_state = 0;
         }else if(color == 3 && mB_ColorSensor->Color_yellow()){
+            function_flag = true;
+            LineTrace_state = 0;
+        }else if(color == 4 && mB_ColorSensor->Color_purple()){
             function_flag = true;
             LineTrace_state = 0;
         }
@@ -651,7 +749,7 @@ void ThirdSection::lineStop(int color)
         case 5:
         mLineTrace->stop();
         counter++;
-            if(counter >= 200){
+            if(counter >= 100){
                 function_flag =true;
                 counter = 0;
                 lineStop_state = 0;

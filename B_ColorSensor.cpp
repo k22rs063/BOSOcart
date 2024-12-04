@@ -62,7 +62,7 @@ float B_ColorSensor::get_S()
 
 bool B_ColorSensor::Color_blue()
 {
-	return (H > 50) ? true : false;
+	return (H > 43) ? true : false;
 }
 
 bool B_ColorSensor::Color_green()
@@ -89,6 +89,12 @@ bool B_ColorSensor::Color_white()
 {
 	return (rgb_brightness > 30) ? true : false;
 }
+
+bool B_ColorSensor::Color_purple()
+{
+	return (S < 30) && (rgb_brightness < 23) ? true : false;
+}
+
 bool B_ColorSensor::Color_blueWhite()
 {
 	if((S >= 30) && (rgb_brightness > 45)){

@@ -23,6 +23,7 @@ class ThirdSection : public Scene{
     const int green = 1;
     const int red = 2;
     const int yellow = 3;
+    const int purple = 4;
 
 
     int state;

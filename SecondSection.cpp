@@ -26,6 +26,7 @@ void SecondSection::execute()
         case 10:
             mLineTrace->start();
             if (mB_ColorSensor->Color_red()) {
+                mBGMControl->stopBGM();
                 mLineTrace->stop();
                 flag = true;
             }
