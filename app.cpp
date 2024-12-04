@@ -183,8 +183,8 @@ void run_task(intptr_t unused){
         
         if(gBotton->button_pressed_center()){
             printf("left button pressed\n");
-            // gBGMControl->setBGM();
-            // gBGMControl->startBGM();
+            gBGMControl->setBGM("ev3rt/res/zinguru.wav");
+            gBGMControl->startBGM();
             run_state = 10;
         }
         break;
@@ -244,8 +244,10 @@ void run_task(intptr_t unused){
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 4){
              gDisplay->text_reset();
-             gDisplay->text("PURPLE");
+             gDisplay->image_load("ev3rt/res/purple.bmp");
+             //gDisplay->text("PURPLE");
             //run_state = 130;
+            run_state = 110;
         }else{
              gDisplay->text_reset();
              gDisplay->text("NONCOLER");

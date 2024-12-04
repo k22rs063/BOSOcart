@@ -107,7 +107,7 @@ bool B_ColorSensor::Color_blueWhite()
 int B_ColorSensor::get_Color()
 {
 	// 青色の判定
-    if ((H > 40) && (rgb_brightness < 25) && (S > 50)) {
+    if ((H > 40) && (rgb_brightness < 25) && (S > 50) && (rgb_brightness > 5)) {
         return blue;
     }
     // 緑色の判定
@@ -115,13 +115,13 @@ int B_ColorSensor::get_Color()
         return green;
     }
     // 赤色の判定
-    else if ((H < 10) && (S > 65) && (rgb_brightness < 55)) {
+    else if ((H < 10) && (S > 65) && (rgb_brightness < 55) && (rgb_brightness > 5)) {
         return red;
     }
     // 黄色の判定
     else if ((S > 70) && (rgb_brightness > 55)) {
         return yellow;
-    }else if(S < 30){
+    }else if((S < 30) && (rgb_brightness < 23) && (rgb_brightness > 5)){
 		return purple;
 	}else {
         return error;
