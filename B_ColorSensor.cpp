@@ -92,7 +92,7 @@ bool B_ColorSensor::Color_white()
 
 bool B_ColorSensor::Color_purple()
 {
-	return (S < 30) && (rgb_brightness < 23) ? true : false;
+	return (S < 37) && (rgb_brightness < 23) ? true : false;
 }
 
 bool B_ColorSensor::Color_blueWhite()

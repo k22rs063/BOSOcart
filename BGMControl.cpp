@@ -13,14 +13,14 @@ void BGMControl::setBGM(const char *fill)
 {
      //ev3_memfile_free(memfile_t *p_memfile);
      ev3_memfile_load(fill, &memfile); //SDカード内の"test.wav"をメモリファイルとしてロード
-     ev3_speaker_set_volume(7); //音量の設定
+     ev3_speaker_set_volume(5); //音量の設定7
      //ev3_speaker_play_file(p_memfile,duration);
 }
 
 void BGMControl::set_blueBGM()
 {
     ev3_memfile_load("ev3rt/res/blue.wav", &memfile_blue);
-    ev3_speaker_set_volume(15); //音量の設定
+    ev3_speaker_set_volume(5); //音量の設定
 }
 
 void BGMControl::set_greenBGM()

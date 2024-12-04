@@ -101,6 +101,9 @@ void main_task(intptr_t unused){
     gBGMControl->set_yellowBGM();
     gBGMControl->set_redBGM();
 
+    //gBGMControl->setBGM("ev3rt/res/r18.wav");
+    // gBGMControl->startBGM();
+
     
     
     sta_cyc(EV3_CYC_RUN);
@@ -123,7 +126,7 @@ void main_task(intptr_t unused){
     // RunAction::setObject(&colorsensor,&setMotor);
     
 }
-int run_state = 200;
+int run_state = 200;//200
 memfile_t memfile;
 int timer = 0;
 int before_color = 5;
@@ -161,6 +164,7 @@ void run_task(intptr_t unused){
 
         case 200:
         gDisplay->text("runMode");
+        
         if(gBotton->button_pressed_right()){
             gDisplay->text_reset();
             run_state = 205;
@@ -229,6 +233,7 @@ void run_task(intptr_t unused){
                 gBGMControl->startBGM_blue();
              }
             gDisplay->image_load("ev3rt/res/blue2-2.bmp");
+    
             before_color = 0;
             run_state = 110;
         }else if(gB_ColorSensor->get_Color() == 2){
@@ -246,6 +251,7 @@ void run_task(intptr_t unused){
             gDisplay->image_load("ev3rt/res/red.bmp");
             if(gB_ColorSensor->get_Color() != before_color){
                 gBGMControl->startBGM_red();
+                gBGMControl->startBGM();
              }
             before_color = 1;
             run_state = 110;
