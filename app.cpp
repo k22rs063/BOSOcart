@@ -100,7 +100,7 @@ void main_task(intptr_t unused){
     gBGMControl->set_greenBGM();
     gBGMControl->set_yellowBGM();
     gBGMControl->set_redBGM();
-
+    gBGMControl->set_purpleBGM();
     //gBGMControl->setBGM("ev3rt/res/r18.wav");
     // gBGMControl->startBGM();
 
@@ -267,6 +267,9 @@ void run_task(intptr_t unused){
         }else if(gB_ColorSensor->get_Color() == 4){
              gDisplay->text_reset();
              gDisplay->image_load("ev3rt/res/purple.bmp");
+             if(gB_ColorSensor->get_Color() != before_color){
+                gBGMControl->startBGM_purple();
+             }
              before_color = 4;
              //gDisplay->text("PURPLE");
             //run_state = 130;

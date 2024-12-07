@@ -31,7 +31,7 @@ void Section1::execute()
     
     switch(state) {
         case 0://直線１
-            mLineTrace->setParameter(45, 0.07, 0, 1.5);
+            mLineTrace->setParameter(45, 0.07, 0, 1.5);//0.07, 0, 1.5
             mDistance->start();
             state = 10;
             break;
@@ -39,7 +39,7 @@ void Section1::execute()
         case 10://カーブ１
             mLineTrace->start();
             if(mDistance->getDistance() > 265){
-                mLineTrace->setParameter(30, 0.43, 0, 3);
+                mLineTrace->setParameter(30, 0.5, 0, 4);// 0.43, 0, 3
                 mDistance->start();
                 state = 15;
                 //state = 100;
@@ -60,7 +60,7 @@ void Section1::execute()
         case 20://カーブ２
         mLineTrace->start();
         if(mDistance->getDistance() > 135){
-            mLineTrace->setParameter(30,0.4,0,2.5);
+            mLineTrace->setParameter(30,0.4,0,3);//30,0.4,0,2.5
             mDistance->start();
             state = 25;
             //state = 100;

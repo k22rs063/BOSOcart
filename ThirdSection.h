@@ -29,7 +29,7 @@ class ThirdSection : public Scene{
     int state;
     double circlerush = 2;//2
     double circle_l = 2.5;//3
-    int circlestraight = 12;
+    int circlestraight = 11;
     int rotate_distance = 5;
 
     int LineTrace_state = 0;

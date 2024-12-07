@@ -208,7 +208,7 @@ void ThirdSection::execute()
         break;
 
         case 61:
-        lineStop(green);
+        lineStop(purple);
         if(function_flag){
             function_flag = false;
             state = 65;
@@ -236,7 +236,7 @@ void ThirdSection::execute()
         break;
 
         case 71:
-        lineStop(blue);
+        lineStop(purple);
         if(function_flag){
             function_flag = false;
             state = 75;
@@ -320,7 +320,7 @@ void ThirdSection::execute()
         break;
 
         case 101:
-        lineStop(red);
+        lineStop(purple);
         if(function_flag){
             function_flag = false;
             state = 105;
@@ -348,7 +348,7 @@ void ThirdSection::execute()
         break;
 
         case 111:
-        lineStop(yellow);
+        lineStop(purple);
         if(function_flag){
             function_flag = false;
             state = 115;
@@ -619,8 +619,8 @@ void ThirdSection::LineTrace(int color)
         LineTrace_state++;
 
         case 3:
-        mLineTrace->start();
-        //mMotorControl->straight();
+        //mLineTrace->start();
+        mMotorControl->straight();
         if(color == 0 && mB_ColorSensor->Color_blue()){
             function_flag = true;
             LineTrace_state = 0;
@@ -741,8 +741,11 @@ void ThirdSection::lineStop(int color)
         }else if(color == 2){
             mBGMControl->startBGM_red();
             lineStop_state = 5;
-        }else{
+        }else if(color == 3){
             mBGMControl->startBGM_yellow();
+            lineStop_state = 5;
+        }else if(color == 4){
+            mBGMControl->startBGM_purple();
             lineStop_state = 5;
         }
         break;
