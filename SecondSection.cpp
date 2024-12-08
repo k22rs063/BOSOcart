@@ -13,7 +13,7 @@ SecondSection::~SecondSection()
 void SecondSection::execute()
 {
     char buf[32];
-    sprintf(buf, "SecondSection->state: %d", state);
+    sprintf(buf, "SecondSection->state: %d", state);//
     mDisplay->text_display(buf);
     
     switch(state) {

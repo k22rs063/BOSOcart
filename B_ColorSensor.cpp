@@ -92,7 +92,7 @@ bool B_ColorSensor::Color_white()
 
 bool B_ColorSensor::Color_purple()
 {
-	return (S < 37) && (rgb_brightness < 23) ? true : false;
+	return ((S < 37) && (rgb_brightness < 23)) ? true : false;
 }
 
 bool B_ColorSensor::Color_blueWhite()
@@ -127,7 +127,7 @@ int B_ColorSensor::get_Color()
     // 黄色の判定
     else if ((S > 70) && (rgb_brightness > 55)) {
         return yellow;
-    }else if((S < 30) && (rgb_brightness < 23) && (rgb_brightness > 5)){
+}else if((S < 30) && (rgb_brightness < 23) && (rgb_brightness > 5) && ((H > 50) || (H < 15))){
 		return purple;
 	}else {
         return error;

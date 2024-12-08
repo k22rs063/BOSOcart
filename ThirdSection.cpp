@@ -585,6 +585,7 @@ void ThirdSection::execute()
 
         case 9999:
         mMotorControl->stop();
+        flag = true;
         break;
     }
 

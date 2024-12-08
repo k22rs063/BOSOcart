@@ -161,7 +161,6 @@ void run_task(intptr_t unused){
 
 
     switch(run_state){
-
         case 200:
         gDisplay->text("runMode");
         
@@ -210,7 +209,8 @@ void run_task(intptr_t unused){
         case 20:
         gThirdSection->execute();
         if(gThirdSection->isFinished()){
-            run_state = 25;
+            gDisplay->text_reset();
+            run_state = 200;
         }
         break;
 
@@ -221,11 +221,23 @@ void run_task(intptr_t unused){
         case 100:
         if(gBotton->button_pressed_center()){
             gDisplay->text_reset();
+            run_state = 101;
+        }
+        break;
+
+        case 101:
+        if(!gBotton->button_pressed_center()){
             run_state = 105;
         }
         break;
         //色判定モード
         case 105:
+        /*真ん中のボタンを押されると最初の戻る処理*/
+        if(gBotton->button_pressed_center()){
+            gDisplay->text_reset();
+            run_state = 120;
+            break;
+        }
         if(gB_ColorSensor->get_Color() == 0){
              gDisplay->text_reset();
              //gDisplay->text("BLUE");
@@ -276,13 +288,19 @@ void run_task(intptr_t unused){
             run_state = 110;
         }else{
              gDisplay->text_reset();
-             gDisplay->text("NONCOLER");
+             //gDisplay->text("NONCOLER");
             //run_state = 135;
         }
 
         break;
 
         case 110:
+        /*真ん中のボタンを押されると最初の戻る処理*/
+        if(gBotton->button_pressed_center()){
+            gDisplay->text_reset();
+            run_state = 120;
+            break;
+        }
         gDisplay->draw_image();
         run_state = 115;
         //gDisplay->draw_image();
@@ -290,12 +308,24 @@ void run_task(intptr_t unused){
         break;
 
         case 115:
+        /*真ん中のボタンを押されると最初の戻る処理*/
+        if(gBotton->button_pressed_center()){
+            gDisplay->text_reset();
+            run_state = 120;
+            break;
+        }
         timer++;
         if(timer >= 200){
             run_state = 105;
             timer = 0;
         }
         //run_state = 105;
+        break;
+
+        case 120:
+        if(!gBotton->button_pressed_center()){
+            run_state = 200;
+        }
         break;
     }
     /*
